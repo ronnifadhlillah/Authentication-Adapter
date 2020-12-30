@@ -5,7 +5,7 @@ import datetime
 # Must create configuration file to define the imap connection
 
 class IMAPCon:
-    def ImapLogin(self,h,un,ps):
+    def ImapLogin(self,h,un,ps,prt):
         try:
             imp=imaplib.IMAP4(h,143)
             imp.login(un,ps)
