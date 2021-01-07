@@ -1,3 +1,7 @@
 
 __pycache__/Authenticator.cpython-37.pyc
 Log/Auth.Log
+README.duplicate
+venv/
+__pycache__/
+dump.py
