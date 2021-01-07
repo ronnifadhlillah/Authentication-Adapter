@@ -1,4 +1,4 @@
-## PY AUTHENTICATION ADAPTER.
+## AUTHENTICATION ADAPTER.
 
 #### Still developing
 
