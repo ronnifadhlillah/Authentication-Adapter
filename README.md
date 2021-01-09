@@ -1,5 +1,7 @@
 ## AUTHENTICATION ADAPTER.
 
+#### ABSTRACT.
+
 This library is using to integrate between hosting or AD with your internal application. like internal webservice / operational business management or etc. <strong>This lib is not suitable for public application use.</strong>
 
 First of all you need to create configuration (.conf) file to define the connection.
@@ -12,22 +14,31 @@ Adapter and strategy :
 
 - Samba AD : Samba AD is written using Python LDAP URL : https://www.python-ldap.org/en/python-ldap-3.3.0/
 
-#### BASIC USAGE
+
+#### TESTING ENVIRONMENT.
+
+- IMAP
+  - CPanel 92.0 (build 7)
+- SMBAD
+  - Linux CentOS 7
+  - Samba 4.8.3
+
+#### BASIC USAGE.
 - IMAP
     ```sh
-    >> import Adapter
-    >> c=adapter.Strategy()
-    >> conn=c.IMAP('domain.tld','santoso@domain.tld','your password',port)
+    >>> import Adapter
+    >>> c=adapter.Strategy()
+    >>> conn=c.IMAP('domain.tld','santoso','your password',port)
 
-    >> # Application Response
+    >>> # Application Response
     ```
 - SMBAD
     ```sh
-    >> import Adapter
-    >> c=adapter.Strategy()
-    >> conn=c.SMBAD('domain.tld','santoso','your password',port)
+    >>> import Adapter
+    >>> c=adapter.Strategy()
+    >>> conn=c.SMBAD('domain.tld','santoso','your password',port)
 
-    >> # Application Response
+    >>> # Application Response
     ```
 
 #### This repo is still developing

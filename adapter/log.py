@@ -3,7 +3,7 @@ import datetime
 import configparser
 
 cfg=configparser.ConfigParser()
-cfg.read('conn.conf')
+cfg.read(os.getcwd()+'\conn.conf')
 
 class Logger:
     def Tstamp():
