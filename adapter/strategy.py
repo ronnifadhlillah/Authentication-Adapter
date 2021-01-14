@@ -5,6 +5,8 @@ import os
 import socket
 import tldextract
 import configparser
+import paramiko
+import sys
 
 cfg=configparser.ConfigParser()
 cfg.read(os.getcwd()+'\conn.conf')
@@ -44,7 +46,7 @@ class Strategy:
         addr=socket.gethostbyname(dc[0].upper())
         # attr=['memberOf'] --> For testing the AD
         l=ldap.initialize('ldap://%s' % addr)
-        l.protocol_version=ldap.VERSION3    
+        l.protocol_version=ldap.VERSION3
         l.set_option(ldap.OPT_REFERRALS,prt)
         try:
             l.simple_bind_s(username,ps)
@@ -58,14 +60,30 @@ class Strategy:
             adapter.Logger.LogVerbose(0,un,uri)
             return False
 
-        def DomainValidate(un,uri):
+    def LNXUSR(self,h,un,ps,prt):
+        # simple linux login by using SSH with paramiko
+        lu=paramiko.SSHClient()
+        lu.load_system_host_keys()
+        lu.set_missing_host_key_policy(paramiko.WarningPolicy)
+        try:
+            lu.connect(h,port=prt, username=un, password=ps)
+            # testing ssh connection by executing 'uname -a' script below
+            # stdout,stderr,stdin=lu.exec_command('ls /home')
+            # print(stderr.readlines())
+            adapter.Logger.LogVerbose(1,un,uri)
+            return True
+        except paramiko.ssh_exception.AuthenticationException:
+            adapter.Logger.LogVerbose(1,un,uri)
+            return False
+
+    def DomainValidate(un,uri):
             # Validation URI parameter
             # Validation if input using IP as Domain Controller , it's not recommend
             if uri.replace('.','').isnumeric() == True:
                 adapter.Logger.LogVerbose(3,un,uri)
                 return False
             #Validation port on IMAP
-            prt=list(995,993,465,143a)
+            prt=list(995,993,465,143)
             if cfg['IMAP']['Port'] not in prt:
                 adapter.Logger.LogVerbose(0,un,uri)
                 return False

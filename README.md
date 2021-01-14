@@ -12,9 +12,6 @@ Adapter and strategy :
   - CPanel Hosting : https://docs.cpanel.net/cpanel/email/set-up-mail-client/
   - Plesk Hosting : https://www.plesk.com/blog/various/server-wide-mail-settings-configuring-them-in-plesk/.
 
-- Samba AD : Samba AD is written using Python LDAP URL : https://www.python-ldap.org/en/python-ldap-3.3.0/
-
-
 #### TESTING ENVIRONMENT.
 
 - IMAP
@@ -37,6 +34,15 @@ Adapter and strategy :
     >>> import Adapter
     >>> c=adapter.Strategy()
     >>> conn=c.SMBAD('domain.tld','santoso','your password',port)
+
+    >>> # Application Response
+    ```
+
+- LINUX USER
+    ```sh
+    >>> import Adapter
+    >>> c=adapter.Strategy()
+    >>> conn=c.LNXUSR('domain.tld','santoso','your password',port)
 
     >>> # Application Response
     ```
